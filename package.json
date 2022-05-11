@@ -1,0 +1,18 @@
+{
+  "name": "min-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup -cw"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "rollup": "^2.72.1",
+    "rollup-plugin-babel": "^4.4.0"
+  }
+}
