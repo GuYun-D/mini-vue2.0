@@ -24,7 +24,7 @@ export function defineReactive(target, key, value) {
    * 递归调用
    * 当value还是一个对象的时候继续使用监视，也就是深度属性劫持
    */
-  if (typeof value === 'object') observe(value)
+  observe(value)
   Object.defineProperty(target, key, {
     get() {
       return value
@@ -32,6 +32,7 @@ export function defineReactive(target, key, value) {
 
     set(newValue) {
       if (newValue === value) return
+      observe(newValue)
       value = newValue
     }
   })
