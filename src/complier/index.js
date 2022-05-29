@@ -65,7 +65,7 @@ function gen(node) {
         lastIndex = index + match[0].length
       }
 
-      if(lastIndex < text.length){
+      if (lastIndex < text.length) {
         tokens.push(JSON.stringify(text.slice(lastIndex)))
       }
 
@@ -93,9 +93,7 @@ function genChildren(children) {
 function codeGen(ast) {
   // debugger
   let children = genChildren(ast.children)
-  let code = (
-    `_c('${ast.tag}',${ast.attrs.length > 0 ? getProps(ast.attrs) : 'null'}${ast.children.length ? `,${children}` : ''})`
-  )
+  let code = `_c('${ast.tag}', ${ast.attrs.length > 0 ? getProps(ast.attrs) : 'null'}${ast.children.length ? `,${children}` : ''})`
   return code
 }
 
@@ -110,5 +108,19 @@ export function complieToFunction(template) {
   // console.log("模板编译好的AST：", ast);
 
   // 生成render方法，render方法执行的结果就是 虚拟dom
-  console.log(codeGen(ast));
+  let strCode = codeGen(ast)
+  console.log(strCode);
+
+  /**
+   * 模板引擎的原理：width + new Function
+   * 
+   * width(this){
+   *  ${name}，函数体的this默认指向width的参数，所以函数体内部的变量的值就直接去里面找
+   * }
+   */
+  strCode = `with(this){return ${strCode}}`
+  const render = new Function(strCode)
+  console.log(render);
+
+  return render
 }
