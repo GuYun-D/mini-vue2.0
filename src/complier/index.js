@@ -109,7 +109,7 @@ export function complieToFunction(template) {
 
   // 生成render方法，render方法执行的结果就是 虚拟dom
   let strCode = codeGen(ast)
-  console.log(strCode);
+  // console.log(strCode);
 
   /**
    * 模板引擎的原理：width + new Function
@@ -120,7 +120,7 @@ export function complieToFunction(template) {
    */
   strCode = `with(this){return ${strCode}}`
   const render = new Function(strCode)
-  console.log(render);
+  // console.log(render);
 
   return render
 }

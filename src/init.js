@@ -65,7 +65,7 @@ export function initMixin(Vue) {
      * 有，就不会走上面，直接使用render
      */
     opts.render;
-    console.log("拿到render函数了", opts.render);
+    // console.log("拿到render函数了", opts.render);
 
     /**
      * 组件的挂载
